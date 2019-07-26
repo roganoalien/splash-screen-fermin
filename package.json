@@ -1,0 +1,26 @@
+{
+  "name": "fermin-splash",
+  "version": "1.0.0",
+  "description": "Spash Screen para registro de usuarios a través de un portal que es redirigido por un modem de conexión de una plaza",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roganoalien/splash-screen-fermin.git"
+  },
+  "keywords": [
+    "Splash",
+    "Screen",
+    "Login",
+    "Nodejs",
+    "Passport"
+  ],
+  "author": "Rodrigo García",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roganoalien/splash-screen-fermin/issues"
+  },
+  "homepage": "https://github.com/roganoalien/splash-screen-fermin#readme"
+}
