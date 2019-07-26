@@ -1,0 +1,78 @@
+/////////////////////////
+// FLEX CONTAINER SASS //
+/////////////////////////
+// @mixin flex-container($algin: center, $direction: row, $justify: center, $wrap: nowrap) {
+//     align-items: $algin;
+//     display: flex;
+//     flex-direction: $direction;
+//     flex-wrap: $wrap;
+//     justify-content: $justify;
+// }
+///////////////////////////
+// FLEX CONTAINER STYLUS //
+///////////////////////////
+flex-container($align = center, $direction = row, $justify = center, $wrap = nowrap){
+    align-items $align
+    display flex
+    flex-direction $direction
+    flex-wrap $wrap
+    justify-content $justify
+}
+///////////////////
+// POSITION SASS //
+///////////////////
+// @mixin position-select($x, $y, $position: absolute, $left: true, $top: true) {
+//     @if $left {
+//         left: $x;
+//     }
+//     @else {
+//         right: $x;
+//     }
+
+//     position: $position;
+
+//     @if $top {
+//         top: $y;
+//     }
+//     @else {
+//         bottom: $y;
+//     }
+
+//     @if $position != absolute and $position != fixed {
+//         @error "Position-select is mented to be used only with position absolute or fixed";
+//     }
+// }
+////////////////////////////
+// POSITION-SELECT STYLUS //
+////////////////////////////
+position-select($x, $y = $x, $position = absolute, $left = true, $top = true){
+    position $position
+    // X conditionals
+    if $left {
+        left $x
+    } else {
+        right $x
+    }
+    // Y conditionals
+    if $top {
+        top $y
+    } else{
+        bottom $y
+    }
+    // Throw Error
+    if $position != absolute and $position != fixed {
+        error('Position-select is mented to be used only with position absolute or fixed')
+    }
+}
+//////////////////////////
+// iOS Shadow like SASS //
+//////////////////////////
+// @mixin my-shadow($x: 0, $y: 25px, $blur: 20px, $expand: -10px, $color: $c-black, $alpha: .025){
+// 	box-shadow: $x $y $blur $expand rgba($color, $alpha);
+// }
+////////////////////////////
+// iOS Shadow like Stylus //
+////////////////////////////
+my-shadow($x = 0, $y = 25px, $blur = 20px, $expand = -10px, $color= black, $alpha = 0.15){
+    box-shadow $x $y $blur $expand rgba($color, $alpha)
+}
