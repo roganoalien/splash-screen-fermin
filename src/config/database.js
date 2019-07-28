@@ -7,5 +7,5 @@ mongoose
         useCreateIndex: true,
         useFindAndModify: false
     })
-    .then(db => console.log(`Conectado a la BD {${config.dbName}}`))
+    .then(db => console.log(`Conectado a la BD: ${config.dbName}`))
     .catch(err => console.log(err));

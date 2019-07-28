@@ -1,4 +1,3 @@
-
 doctype html
 
 head(lang="es,ES")
@@ -15,14 +14,14 @@ head(lang="es,ES")
 	//- meta(name="msapplication-config", content="/public/favicons/browserconfig.xml")
 	//- meta(name="theme-color", content="#fdd35d")
 	title=title
-	//- link(rel="stylesheet", href="/public/css/vendors/cssVendors.min.css")
-	link(rel="stylesheet", href="/public/css/main.min.css")
-body
+	link(rel="stylesheet", href="/vendors/tailwindcss/dist/tailwind.min.css")
+	//- link(rel="stylesheet", href="/public/css/main.min.css")
+body.bg-gray-300
 	//-- Messages
 	include messages.pug
 	block content
 
-	script(src="/public/js/main.min.js")
+	//- script(src="/public/js/main.min.js")
 	script.
 		document.addEventListener('DOMContentLoaded', function(){
 			//-- Default Scripts to load

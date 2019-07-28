@@ -1,55 +1,57 @@
 {
-  "name": "fermin-splash",
-  "version": "1.0.0",
-  "description": "Spash Screen para registro de usuarios a través de un portal que es redirigido por un modem de conexión de una plaza",
-  "main": "app.js",
-  "scripts": {
-    "test": "nodemon app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/roganoalien/splash-screen-fermin.git"
-  },
-  "keywords": [
-    "Splash",
-    "Screen",
-    "Login",
-    "Nodejs",
-    "Passport"
-  ],
-  "author": "Rodrigo García",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/roganoalien/splash-screen-fermin/issues"
-  },
-  "homepage": "https://github.com/roganoalien/splash-screen-fermin#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "connect-flash": "^0.1.1",
-    "dotenv": "^8.0.0",
-    "express": "^4.17.1",
-    "express-session": "^1.16.1",
-    "express-validator": "^5.3.1",
-    "mongoose": "^5.5.11",
-    "morgan": "^1.9.1",
-    "notyf": "^3.0.4",
-    "passport": "^0.4.0",
-    "pug": "^2.0.3",
-    "serve-favicon": "^2.5.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "bootstrap": "^4.3.1",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^6.1.0",
-    "gulp-babel": "^8.0.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-rename": "^1.4.0",
-    "gulp-sourcemaps": "^2.6.5",
-    "gulp-stylus": "^2.7.0",
-    "gulp-uglify": "^3.0.2",
-    "nodemon": "^1.19.1"
-  }
+    "name": "fermin-splash",
+    "version": "1.0.0",
+    "description": "Spash Screen para registro de usuarios a través de un portal que es redirigido por un modem de conexión de una plaza",
+    "main": "app.js",
+    "scripts": {
+        "dev": "nodemon app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/roganoalien/splash-screen-fermin.git"
+    },
+    "keywords": [
+        "Splash",
+        "Screen",
+        "Login",
+        "Nodejs",
+        "Passport"
+    ],
+    "author": "Rodrigo García",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/roganoalien/splash-screen-fermin/issues"
+    },
+    "homepage": "https://github.com/roganoalien/splash-screen-fermin#readme",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "connect-flash": "^0.1.1",
+        "dotenv": "^8.0.0",
+        "express": "^4.17.1",
+        "express-session": "^1.16.1",
+        "express-validator": "^5.3.1",
+        "mongoose": "^5.5.11",
+        "morgan": "^1.9.1",
+        "notyf": "^3.0.4",
+        "passport": "^0.4.0",
+        "passport-local": "^1.0.0",
+        "pug": "^2.0.3",
+        "serve-favicon": "^2.5.0",
+        "tailwindcss": "^1.0.5"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.5.5",
+        "@babel/preset-env": "^7.5.5",
+        "bootstrap": "^4.3.1",
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "^6.1.0",
+        "gulp-babel": "^8.0.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-rename": "^1.4.0",
+        "gulp-sourcemaps": "^2.6.5",
+        "gulp-stylus": "^2.7.0",
+        "gulp-uglify": "^3.0.2",
+        "nodemon": "^1.19.1"
+    }
 }
