@@ -1,0 +1,17 @@
+mixin left-menu($dashboard = true, $crud = false, $users = false)
+	div(class="w-full lg:w-1/5 lg:px-6 text-xl text-gray-800 leading-normal")
+		div(class="w-full sticky inset-0 hidden h-64 lg:h-auto overflow-x-hidden overflow-y-auto lg:overflow-y-hidden lg:block mt-0 z-20", style="top: 5em;")
+			p(class="text-base font-bold py-2 lg:pb-6 text-gray-700") Menú
+			ul.list-reset
+				- var $dashboard_class = ($dashboard) ? 'active' : '';
+				- var $crud_class = ($crud) ? 'active' : '';
+				- var $users_class = ($users) ? 'active' : '';
+				li(class="py-2 md:my-0")
+					a.admin-left-nav-anchor(href="/admin", class=`${$dashboard_class} block pl-4 align-middle text-gray-700 no-underline border-l-4 border-transparent lg:border-purple-500 lg:hover:border-purple-500`)
+						span(class="pb-1 md:pb-0 text-sm font-bold") Dashboard
+				li(class="py-2 md:my-0 hover:bg-purple-100 lg:hover:bg-transparent")
+					a.admin-left-nav-anchor(href="/admin/crud", class=`${$crud_class} block pl-4 align-middle text-gray-700 no-underline border-l-4 border-transparent lg:hover:border-gray-400`)
+						span(class="pb-1 md:pb-0 text-sm font-bold") CRUD
+				li(class="py-2 md:my-0 hover:bg-purple-100 lg:hover:bg-transparent")
+					a.admin-left-nav-anchor(href="/admin/users", class=`${$users_class} block pl-4 align-middle text-gray-700 no-underline border-l-4 border-transparent lg:hover:border-gray-400`)
+						span(class="pb-1 md:pb-0 text-sm font-bold") Usuarios
