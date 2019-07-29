@@ -1,0 +1,100 @@
+.main-form-splash{
+	my-shadow()
+	background linear-gradient(#0071BC, #3FA9F5)
+	padding 32px
+	.button-group{
+		flex-container()
+		margin 0
+	}
+	button{
+		flex-container()
+		background #015188
+		border 1px solid $c-white
+		color $c-white
+		width 126px
+		&:hover{
+			background darken(#015188, 25%)
+			border 1px solid $c-white
+		}
+	}
+	.flex-content-image{
+		flex-container(center, row, center, wrap)
+		img{
+			width 35%
+			&:first-child{
+				margin-right 30%
+			}
+		}
+		p{
+			color $c-white
+			font-size 12px
+			font-weight bold
+			text-align left !important
+		}
+	}
+	label{
+		color $c-white
+		font-size 12px
+	}
+	input{
+		background $c-white
+		border 0px solid transparent
+		border-radius 5px
+		color $c-black
+		font-size 14px
+	}
+	.form-group{
+		margin-bottom 10px !important
+		p{
+			color $c-white !important
+			font-size 11px
+			margin 10px 0
+			text-align center
+			a{
+				color $c-white !important
+				text-decoration underline
+			}
+		}
+		&.of-radios{
+			margin-bottom 0
+		}
+	}
+	.form-check{
+		input{
+			display none
+		}
+		label{
+			flex-container(center, row, flex-start)
+			position relative
+			&:after{
+				position-select(2px,5px)
+				background $c-black
+				border-radius 50%
+				content ""
+				height 8px
+				opacity 0
+				width 8px
+				z-index 2
+			}
+			&:before{
+				background $c-white
+				border-radius 50%
+				content ""
+				display inline-block
+				height 12px
+				margin-right 10px
+				width 12px
+				z-index 1
+			}
+		}
+		input:checked + label:after{
+			opacity 1
+		}
+	}
+}
+.splash-container{
+	min-height 100vh
+	.splash-row{
+		min-height 100vh
+	}
+}

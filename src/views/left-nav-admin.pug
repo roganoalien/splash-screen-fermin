@@ -7,11 +7,11 @@ mixin left-menu($dashboard = true, $crud = false, $users = false)
 				- var $crud_class = ($crud) ? 'active' : '';
 				- var $users_class = ($users) ? 'active' : '';
 				li(class="py-2 md:my-0")
-					a.admin-left-nav-anchor(href="/admin", class=`${$dashboard_class} block pl-4 align-middle text-gray-700 no-underline border-l-4 border-transparent lg:border-purple-500 lg:hover:border-purple-500`)
-						span(class="pb-1 md:pb-0 text-sm font-bold") Dashboard
+					a.admin-left-nav-anchor(href="/administrador", class=`${$dashboard_class} block pl-4 align-middle text-gray-700 no-underline border-l-4 border-transparent lg:border-purple-500 lg:hover:border-purple-500`)
+						span(class="pb-1 md:pb-0 text-sm font-bold text-gray-700") Dashboard
 				li(class="py-2 md:my-0 hover:bg-purple-100 lg:hover:bg-transparent")
-					a.admin-left-nav-anchor(href="/admin/crud", class=`${$crud_class} block pl-4 align-middle text-gray-700 no-underline border-l-4 border-transparent lg:hover:border-gray-400`)
-						span(class="pb-1 md:pb-0 text-sm font-bold") CRUD
+					a.admin-left-nav-anchor(href="/administrador/crear-admin", class=`${$crud_class} block pl-4 align-middle text-gray-700 no-underline border-l-4 border-transparent lg:hover:border-gray-400`)
+						span(class="pb-1 md:pb-0 text-sm font-bold text-gray-700") Crear Administrador
 				li(class="py-2 md:my-0 hover:bg-purple-100 lg:hover:bg-transparent")
-					a.admin-left-nav-anchor(href="/admin/users", class=`${$users_class} block pl-4 align-middle text-gray-700 no-underline border-l-4 border-transparent lg:hover:border-gray-400`)
-						span(class="pb-1 md:pb-0 text-sm font-bold") Usuarios
+					a.admin-left-nav-anchor(href="/administrador/usuarios", class=`${$users_class} block pl-4 align-middle text-gray-700 no-underline border-l-4 border-transparent lg:hover:border-gray-400`)
+						span(class="pb-1 md:pb-0 text-sm font-bold text-gray-700") Usuarios Registrados

@@ -1,22 +1,12 @@
 if errors
-	.alerts-holder
+	#alerts-holder.multiple
 		each error in errors
-			.alert.danger#show-me(role="alert")
-				span
-					<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20"><g fill="#e04b59"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-419 -240)" fill="#e04b59"><g id="icons" transform="translate(56 160)"><path id="close-[#1511]" d="M375.018 90L384 98.554 382.48 100l-8.98-8.554-8.982 8.554L363 98.554 371.98 90 363 81.446 364.518 80l8.982 8.554L382.48 80l1.52 1.446z"></path></g></g></g></g></svg>
-				p=error.msg
+			span=error.msg
 
 if error != ''
-	.alerts-holder
-		.alert.danger#show-me(role="alert")
-			span
-				<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20"><g fill="#e04b59"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-419 -240)" fill="#e04b59"><g id="icons" transform="translate(56 160)"><path id="close-[#1511]" d="M375.018 90L384 98.554 382.48 100l-8.98-8.554-8.982 8.554L363 98.554 371.98 90 363 81.446 364.518 80l8.982 8.554L382.48 80l1.52 1.446z"></path></g></g></g></g></svg>
-			p=error
+	#alerts-holder
+		span=error
 
 if success != ''
-	.alerts-holder
-		.alert.success#show-me(role="alert")
-			span
-				<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"><g fill="#50e3c2"><path d="M13.5 24.26L7.24 18l-2.12 2.12 8.38 8.38 18-18-2.12-2.12z"></path></g></svg>
-				//- <svg xmlns="http://www.w3.org/2000/svg" width="11" height="8" viewBox="0 0 11 8"><g fill="#50e3c2"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Dribbble-Light-Preview" transform="translate(-304 -366)" fill="#50e3c2"><g id="icons" transform="translate(56 160)"><path id="done_mini-[#1484]" d="M259 207.6l-6.768 6.4-.001-.001V214L248 210l1.692-1.6 2.539 2.4 5.077-4.8z"></path></g></g></g></g></svg>
-			p=success
+	#alerts-holder.success
+		span=success

@@ -15,16 +15,18 @@ head(lang="es,ES")
 	//- meta(name="theme-color", content="#fdd35d")
 	title=title
 	link(rel="stylesheet", href="/vendors/tailwindcss/dist/tailwind.min.css")
+	link(rel="stylesheet", href="/vendors/notyf/notyf.min.css")
 	link(rel="stylesheet", href="/public/css/main.min.css")
 body.bg-gray-300
 	//-- Messages
 	include messages.pug
 	block content
-
-	//- script(src="/public/js/main.min.js")
+	
+	script(src="/public/js/vendors/vendors.min.js")
+	script(src="/public/js/main.min.js")
 	script.
 		document.addEventListener('DOMContentLoaded', function(){
 			//-- Default Scripts to load
-			//- UTILS.alert();
+			UTILS.alert();
 		});
 	block scripts

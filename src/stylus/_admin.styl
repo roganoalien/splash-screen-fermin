@@ -1,10 +1,15 @@
+.logo-nav-admin{
+	height 40px
+	margin 10px 0
+	width auto
+}
 .admin-left-nav-anchor{
 	border-color transparent
-	span{
-		color $c-black
-	}
+	// span{
+	// 	color lighten($c-black, 35%)
+	// }
 	&:hover{
-		border-color $c-white-extra
+		border-color $c-white
 		span{
 			color $c-pink
 		}
@@ -27,8 +32,8 @@
 }
 .custom-input-admin{
 	&:focus, &:active{
-		border 1px solid $c-orange !important
-		box-shadow 0 0 2px $c-orange
+		border 1px solid $c-pink !important
+		box-shadow 0 0 2px $c-pink
 	}
 }
 .no-underline{
@@ -40,6 +45,12 @@
 
 button.user-intel{
 	position relative
+	img{
+		opacity .5
+	}
+	span{
+		color lighten($c-black, 50%)
+	}
 	.floating-block{
 		my-shadow(0, 20px, 12px, -10px, darken(#e2e8f0, 10%), .25)
 		position-select(50%, 0)

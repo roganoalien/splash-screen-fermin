@@ -3,7 +3,7 @@ const gulp = require('gulp'),
     babel = require('gulp-babel'),
     concat = require('gulp-concat'),
     log = require('./logger'),
-    minify = require('gulp-minify'),
+    cleanCSS = require('gulp-clean-css'),
     rename = require('gulp-rename'),
     stylus = require('gulp-stylus'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -12,7 +12,11 @@ const gulp = require('gulp'),
 const $vendors = './node_modules',
     $cssVendorsFolder = './public/css/vendors',
     $bootstrap = `${$vendors}/bootstrap/dist/css/bootstrap.css`,
-    $cssVendors = [$bootstrap];
+    // $notyf = `${$vendors}/notyf/notyf.min.css`,
+    $cssVendors = [$bootstrap],
+    $jsVendorsFolder = './public/js/vendors',
+    $notyfJS = `${$vendors}/notyf/notyf.min.js`,
+    $jsVendors = [$notyfJS];
 
 ////////////////////
 // Error FUNCTION //
@@ -34,9 +38,7 @@ gulp.task('stylus', () => {
             })
         )
         .on('error', displayError)
-        .pipe(
-            autoprefixer()
-        )
+        .pipe(autoprefixer())
         .pipe(rename('main.min.css'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./public/css'))
@@ -50,10 +52,9 @@ gulp.task('stylus', () => {
 gulp.task('css-vendors', () => {
     return gulp
         .src($cssVendors, { base: $vendors })
-        .pipe(concat('cssVendors.css'))
-        .pipe(minify())
-        .pipe(rename('css-vendors.min.css'))
-        .pipe(gulp.dest('./public/css/vendors'))
+        .pipe(concat('cssVendors.min.css'))
+        .pipe(cleanCSS({ compatibility: 'ie10' }))
+        .pipe(gulp.dest($cssVendorsFolder))
         .on('end', () => {
             log('Vendors (CSS) Concatenados y minificados', 'blue');
         });
@@ -85,15 +86,15 @@ gulp.task('js', function() {
 ////////////
 // VENDORS//
 ////////////
-// gulp.task('vendors', function() {
-//     return gulp
-//         .src('./dev-js-vendors/**/*.js')
-//         .pipe(concat('vendors.min.js'))
-//         .pipe(gulp.dest('./js/vendors'))
-//         .on('end', () => {
-//             log('Vendors Concatenados', 'blue');
-//         });
-// });
+gulp.task('js-vendors', function() {
+    return gulp
+        .src($jsVendors)
+        .pipe(concat('vendors.min.js'))
+        .pipe(gulp.dest($jsVendorsFolder))
+        .on('end', () => {
+            log('Vendors JS Compilados', 'blue');
+        });
+});
 //////////////
 // WATCHERS //
 //////////////
@@ -107,5 +108,11 @@ gulp.task('watchers', done => {
 
 gulp.task(
     'dev',
-    gulp.series('stylus', 'css-vendors', 'js', gulp.parallel('watchers'))
+    gulp.series(
+        'stylus',
+        'css-vendors',
+        'js',
+        'js-vendors',
+        gulp.parallel('watchers')
+    )
 );

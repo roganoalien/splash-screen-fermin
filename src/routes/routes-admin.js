@@ -1,11 +1,13 @@
 const express = require('express'),
+    { check, validationResult } = require('express-validator/check'),
+    passport = require('passport'),
     router = express.Router();
 
 const { config } = require('../config/config-app'),
     { isAuthenticated } = require('../utils/util-auth');
 
-const adminModel = require('../models/model-admin'),
-    userModel = require('../models/model-user');
+const Admin = require('../models/model-admin'),
+    User = require('../models/model-user');
 
 //-- Vista login
 router.get('/administrador/login', (req, res) => {
@@ -13,16 +15,89 @@ router.get('/administrador/login', (req, res) => {
         title: 'Login de Administrador'
     });
 });
+//-- Inicio de sesión
+router.post(
+    '/administrador/login',
+    passport.authenticate('local', {
+        successRedirect: '/administrador',
+        successFlash: 'Sesión Iniciada',
+        failureRedirect: '/administrador/login',
+        failureFlash: 'Email o Password incorrecto'
+    })
+);
 //-- Vista registro
 router.get('/administrador/registro', (req, res) => {
     res.render('admin/register', {
         title: 'Registro de Administrador'
     });
 });
+//-- Guardamos registro inicial
+router.post(
+    '/administrador/registro',
+    [
+        check('name')
+            .isLength({ min: 4 })
+            .withMessage('El nombre debe de tener mínimo 4 carácteres'),
+        check('email')
+            .not()
+            .isEmpty()
+            .withMessage('Debe elegirse un correo')
+            .isEmail()
+            .withMessage('Se debe elegir un correo válido'),
+        check('password')
+            .isLength({ min: 8 })
+            .withMessage('La contraseña debe de tener al menos 8 carácteres')
+            .matches('[0-9]')
+            .withMessage('La contraseña debe de tener mínimo un número')
+            .matches('[a-z]')
+            .withMessage('La contraseña debe de tener mínimo una minúscula')
+            .matches('[A-Z]')
+            .withMessage('La contraseña debe de tener mínimo una mayúscula'),
+        check('password').custom((value, { req, loc, path }) => {
+            if (value !== req.body.confirmPassword) {
+                throw new Error('Las contraseñas no coinciden');
+            } else {
+                return value;
+            }
+        })
+    ],
+    async (req, res) => {
+        const { name, email, password } = req.body,
+            emailUser = await Admin.findOne({ email }),
+            errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.render('admin/register', {
+                title: 'Registro de Administrador',
+                errors: errors.array()
+            });
+        } else {
+            console.log('REGISTRO -- sin errores');
+            if (emailUser) {
+                console.log('REGISTRO -- correo EXISTE');
+                req.flash('error', '¡El email ya se ha utilizado!');
+                res.redirect('/administrador/registro');
+            } else {
+                console.log('REGISTRO -- correo NO EXISTE');
+                const newAdmin = new Admin({ name, email });
+                newAdmin.password = await newAdmin.encryptPassword(password);
+                await newAdmin.save();
+                req.flash('success', '¡Registro Completado!');
+                res.redirect('/administrador/login');
+            }
+        }
+    }
+);
 //-- Vista dashboard
-router.get('/administrador', (req, res) => {
+router.get('/administrador', isAuthenticated, (req, res) => {
     res.render('admin/dashboard', {
         title: 'Dashboard'
     });
 });
+//-- Cerrar Sesión
+router.get('/administrador/logout', (req, res) => {
+    req.logout();
+    req.flash('success', '¡Sesión Cerrada!');
+    res.redirect('/administrador/login');
+});
+
 module.exports = router;
