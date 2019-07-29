@@ -1,6 +1,7 @@
 const express = require('express'),
     { check, validationResult } = require('express-validator/check'),
     passport = require('passport'),
+    moment = require('moment'),
     router = express.Router();
 
 const { config } = require('../config/config-app'),
@@ -88,9 +89,23 @@ router.post(
     }
 );
 //-- Vista dashboard
-router.get('/administrador', isAuthenticated, (req, res) => {
+router.get('/administrador', isAuthenticated, async (req, res) => {
+    const dateNow = moment().format('DD/MM/YYYY');
+    const thisMonth = moment().format('/MM/');
+    let regex = new RegExp(thisMonth, 'i');
+    const searchNumber = await User.countDocuments({ date: dateNow });
+    const searchMonth = await User.countDocuments({ date: regex });
+    const searchTotal = await User.countDocuments();
     res.render('admin/dashboard', {
-        title: 'Dashboard'
+        title: 'Dashboard',
+        usersToday: searchNumber,
+        usersMonth: searchMonth,
+        usersTotal: searchTotal
+    });
+});
+router.get('/administrador/crear-admin', isAuthenticated, async (req, res) => {
+    res.render('admin/create-admin', {
+        title: 'Crear Administrador'
     });
 });
 //-- Cerrar Sesión
@@ -98,6 +113,26 @@ router.get('/administrador/logout', (req, res) => {
     req.logout();
     req.flash('success', '¡Sesión Cerrada!');
     res.redirect('/administrador/login');
+});
+//-- Registrar Usuario nuevo
+router.post('/registrar/usuario', async (req, res) => {
+    const { name, lastname, email, gender } = req.body;
+    let birthday = req.body.birthday;
+    birthday = moment(birthday).format('DD/MM/YYYY');
+    const already = await User.findOne({ email });
+    console.log(already);
+    if (already) {
+        req.flash('success', '¡Bienvenido de vuelta!');
+        res.redirect('/');
+    } else {
+        const newUser = new User({ name, lastname, birthday, email, gender });
+        await newUser.save();
+        req.flash('success', '¡Gracias por registrarte!');
+        res.render('/', {
+            title: 'Redirigiendo',
+            thisUser: await User.findOne({ email })
+        });
+    }
 });
 
 module.exports = router;

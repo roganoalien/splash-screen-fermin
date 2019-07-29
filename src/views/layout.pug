@@ -16,16 +16,31 @@ head(lang="es,ES")
 	//- meta(name="theme-color", content="#fdd35d")
 	title=title
 	link(rel="stylesheet", href="/public/css/vendors/cssVendors.min.css")
+	link(rel="stylesheet", href="/vendors/notyf/notyf.min.css")
 	link(rel="stylesheet", href="/public/css/main.min.css")
+	//-- Global site tag (gtag.js) - Google Analytics
+	script(async, src="https://www.googletagmanager.com/gtag/js?id=UA-144830859-1")
+	script.
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-144830859-1');
+		if(document.getElementById('userLogged')){
+			gtag('set', {'user_id': document.getElementById('userLogged').getAttribute('data-user')}); // Establezca el ID de usuario mediante el user_id con el que haya iniciado sesión.
+		}
 body
+	if thisUser
+		#userLogged(data-user=thisUser._id)
+
 	//-- Messages
 	include messages.pug
 	block content
 
+	script(src="/public/js/vendors/vendors.min.js")
 	script(src="/public/js/main.min.js")
 	script.
 		document.addEventListener('DOMContentLoaded', function(){
 			//-- Default Scripts to load
-			//- UTILS.alert();
+			UTILS.alert();
 		});
 	block scripts

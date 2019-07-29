@@ -3,7 +3,7 @@ extends ../layout.pug
 block content
 	.container.splash-container
 		.row.align-items-center.justify-content-center.splash-row
-			form.main-form-splash.col-10.col-sm-6.col-md-4.col-lg-4(action="/registrar/usuario", method="POST")
+			form.main-form-splash.col-10.col-sm-8.col-md-8.col-lg-4(action="/registrar/usuario", method="POST")
 				.form-group.flex-content-image
 					img(src="/public/img/4caminos.png", alt="Plaza Cuatro Caminos")
 					img(src="/public/img/wifi.png", alt="WIFI")
@@ -19,14 +19,14 @@ block content
 					input#birthday.form-control(type="date", name="birthday", required)
 				.form-group
 					label(for="email") Email:
-					input#email.form-control(type="text", name="email", required)
+					input#email.form-control(type="email", name="email", required)
 				.form-group.of-radios
 					label(for="female") Sexo:
 				.form-check.form-check-inline
-					input.form-check-input#female(type="radio", name="gender", checked)
+					input.form-check-input#female(type="radio", name="gender", checked, value="femenino")
 					label.form-check-label(for="female") Femenino
 				.form-check.form-check-inline
-					input.form-check-input#male(type="radio", name="gender")
+					input.form-check-input#male(type="radio", name="gender", value="masculino")
 					label.form-check-label(for="male") Masculino
 				.form-group
 					p#formAlert.form-text.text-muted Al continuar aceptas <a href="#terms">nuestos acuerdos y términos de privacidad</a> y también aceptas recibir información y promociones de nosotros
