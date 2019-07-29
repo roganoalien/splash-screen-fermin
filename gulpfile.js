@@ -35,10 +35,7 @@ gulp.task('stylus', () => {
         )
         .on('error', displayError)
         .pipe(
-            autoprefixer({
-                browsers: ['last 2 versions'],
-                cascade: true
-            })
+            autoprefixer()
         )
         .pipe(rename('main.min.css'))
         .pipe(sourcemaps.write())
