@@ -1,9 +1,9 @@
 require('dotenv').config();
 
 const config = {
-    dbName: process.env.DATABASE_NAME,
-    localport: process.env.LOCALHOST_PORT,
-    secret: process.env.SECRET_WORD
+    dbName: 'splash',
+    localport: 3000,
+    secret: 'SplashScreenSecretWord2019'
 };
 
 module.exports = { config };
