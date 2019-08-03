@@ -114,9 +114,16 @@ router.get('/administrador', isAuthenticated, async (req, res) => {
         usersTotal: searchTotal
     });
 });
+//-- Crear Administrador
 router.get('/administrador/crear-admin', isAuthenticated, async (req, res) => {
     res.render('admin/create-admin', {
         title: 'Crear Administrador'
+    });
+});
+//-- Ver usuarios registrados
+router.get('/administrador/usuarios', isAuthenticated, async (req, res) => {
+    res.render('admin/view-users', {
+        title: 'Usuarios Registrados'
     });
 });
 //-- Cerrar Sesión
