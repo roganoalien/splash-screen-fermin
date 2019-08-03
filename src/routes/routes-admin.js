@@ -122,8 +122,10 @@ router.get('/administrador/crear-admin', isAuthenticated, async (req, res) => {
 });
 //-- Ver usuarios registrados
 router.get('/administrador/usuarios', isAuthenticated, async (req, res) => {
+    const users = await User.find();
     res.render('admin/view-users', {
-        title: 'Usuarios Registrados'
+        title: 'Usuarios Registrados',
+        users
     });
 });
 //-- Cerrar Sesión
