@@ -59,8 +59,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //---- ROUTES ----
 //----------------
 app.get('/', (req, res) => {
+    const {
+        base_grant_url,
+        user_continue_url,
+        node_id,
+        node_mac,
+        gateway_id,
+        client_ip,
+        client_mac
+    } = req.query;
+    const userData = {
+        base_grant_url,
+        user_continue_url,
+        node_id,
+        node_mac,
+        gateway_id,
+        client_ip,
+        client_mac
+    };
     res.render('sections/splash', {
-        title: 'Iniciar Sesión'
+        title: 'Iniciar Sesión',
+        redirect: req.query.base_grant_url ? false : true,
+        userData
     });
 });
 app.use(adminRoutes);

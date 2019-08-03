@@ -4,6 +4,14 @@ block content
 	.container.splash-container
 		.row.align-items-center.justify-content-center.splash-row
 			form.main-form-splash.col-10.col-sm-8.col-md-8.col-lg-4(action="/registrar/usuario", method="POST")
+				if !redirect
+					input.d-none.invisible#base_grant_url(name="base_grant_url", value=userData.base_grant_url)
+					input.d-none.invisible#user_continue_url(name="user_continue_url", value=userData.user_continue_url)
+					input.d-none.invisible#node_id(name="node_id", value=userData.node_id)
+					input.d-none.invisible#node_mac(name="node_mac", value=userData.node_mac)
+					input.d-none.invisible#gateway_id(name="gateway_id", value=userData.gateway_id)
+					input.d-none.invisible#client_ip(name="client_ip", value=userData.client_ip)
+					input.d-none.invisible#client_mac(name="client_mac", value=userData.client_mac)
 				.form-group.flex-content-image
 					img(src="/public/img/4caminos.png", alt="Plaza Cuatro Caminos")
 					img(src="/public/img/wifi.png", alt="WIFI")

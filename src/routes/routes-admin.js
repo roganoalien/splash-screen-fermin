@@ -116,22 +116,51 @@ router.get('/administrador/logout', (req, res) => {
 });
 //-- Registrar Usuario nuevo
 router.post('/registrar/usuario', async (req, res) => {
-    const { name, lastname, email, gender } = req.body;
-    let birthday = req.body.birthday;
-    birthday = moment(birthday).format('DD/MM/YYYY');
+    const {
+        name,
+        lastname,
+        email,
+        gender,
+        base_grant_url,
+        user_continue_url,
+        node_id,
+        node_mac,
+        gateway_id,
+        client_ip,
+        client_mac
+    } = req.body;
+    const filter = { email };
+    let birthday = moment(req.body.birthday).format('DD/MM/YYYY');
+    const update = {
+        name,
+        birthday,
+        lastname,
+        email,
+        gender,
+        modem_data: {
+            base_grant_url,
+            user_continue_url,
+            node_id,
+            node_mac,
+            gateway_id,
+            client_ip,
+            client_mac
+        }
+    };
     const already = await User.findOne({ email });
     console.log(already);
     if (already) {
+        const updated = await User.findOneAndUpdate(filter, update, {
+            new: true
+        });
+        console.log(updated);
         req.flash('success', '¡Bienvenido de vuelta!');
         res.redirect('/');
     } else {
-        const newUser = new User({ name, lastname, birthday, email, gender });
+        const newUser = new User(update);
         await newUser.save();
         req.flash('success', '¡Gracias por registrarte!');
-        res.render('/', {
-            title: 'Redirigiendo',
-            thisUser: await User.findOne({ email })
-        });
+        res.redirect('/');
     }
 });
 
