@@ -1,8 +1,10 @@
 const { config } = require('./config-app'),
+    CONNECTION_URI =
+        process.env.MONGODB_URI || `mongodb://localhost/${config.dbName}`,
     mongoose = require('mongoose');
 
 mongoose
-    .connect(`mongodb://localhost/${config.dbName}`, {
+    .connect(CONNECTION_URI, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useFindAndModify: false
