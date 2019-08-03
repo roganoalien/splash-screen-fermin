@@ -63,12 +63,23 @@ router.post(
         })
     ],
     async (req, res) => {
+        const { redirect_url } = req.query;
         const { name, email, password } = req.body,
             emailUser = await Admin.findOne({ email }),
             errors = validationResult(req);
+        let render_view = 'admin/register';
+        let redirect_url_fail = '/administrador/registro',
+            redirect_url_success = '/administrador/login',
+            error_title = 'Registro de Administrador';
+        if (redirect_url === 'administrador') {
+            render_view = 'admin/create-admin';
+            redirect_url_fail = '/administrador/crear-admin';
+            error_title = 'Crear Administrador';
+            redirect_url_success = '/administrador';
+        }
         if (!errors.isEmpty()) {
-            res.render('admin/register', {
-                title: 'Registro de Administrador',
+            res.render(render_view, {
+                title: error_title,
                 errors: errors.array()
             });
         } else {
@@ -76,14 +87,14 @@ router.post(
             if (emailUser) {
                 console.log('REGISTRO -- correo EXISTE');
                 req.flash('error', '¡El email ya se ha utilizado!');
-                res.redirect('/administrador/registro');
+                res.redirect(redirect_url_fail);
             } else {
                 console.log('REGISTRO -- correo NO EXISTE');
                 const newAdmin = new Admin({ name, email });
                 newAdmin.password = await newAdmin.encryptPassword(password);
                 await newAdmin.save();
                 req.flash('success', '¡Registro Completado!');
-                res.redirect('/administrador/login');
+                res.redirect(redirect_url_success);
             }
         }
     }

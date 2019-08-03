@@ -17,6 +17,22 @@
 	&.active{
 		border-color $c-pink
 	}
+	@media (max-width: 1023px){
+		border none !important 
+		padding-left 0 !important
+		&:hover{
+			span{
+				color #4a5568 !important
+				opacity .5
+			}
+		}
+		&.active{
+			span{
+				color $c-pink !important
+				opacity 1
+			}
+		}
+	}
 }
 .custom-anchor-admin{
 	color #a0aec0

@@ -4,31 +4,31 @@ block content
 	include ../nav-admin.pug
 	include ../left-nav-admin.pug
 	div(class="container w-full flex flex-wrap mx-auto px-2 pt-8 lg:pt-16 mt-16")
-		+left-menu(true, false, false)
+		+left-menu(false, true, false)
 		div(class="w-full lg:w-4/5 p-8 mt-6 lg:mt-0 text-gray-900 leading-normal bg-white border border-gray-400 border-rounded shadow-xl flex flex-wrap")
-			h1.title(class="w-full px-2 mb-4 text-xl font-bold uppercase text-gray-600") Dashboard
-			h2.subtitle(class="w-full px-2 mb-4 text-lg font-bold text-gray-500") Información General
-			div(class="w-full sm:w-6/12 lg:w-4/12 xl:w-4/12 px-2 mb-4")
-				.border.border-gray-400.bg-white.rounded-b.flex.flex-col.justify-between.leading-normal.p-4
-					div
-						p.text-sm.text-gray-500.flex.items-center Usuarios Registrados hoy
-						if usersToday
-							p.text-admin-active.font-bold.text-2xl=usersToday
-						else
-							p.text-admin-active.font-bold.text-2xl 0
-			div(class="w-full sm:w-6/12 lg:w-4/12 xl:w-4/12 px-2 mb-4")
-				.border.border-gray-400.bg-white.rounded-b.flex.flex-col.justify-between.leading-normal.p-4
-					div
-						p.text-sm.text-gray-500.flex.items-center Usuarios del Mes
-						if usersMonth
-							p.text-admin-active.font-bold.text-2xl=usersMonth
-						else
-							p.text-admin-active.font-bold.text-2xl 0
-			div(class="w-full sm:w-6/12 lg:w-4/12 xl:w-4/12 px-2 mb-4")
-				.border.border-gray-400.bg-white.rounded-b.flex.flex-col.justify-between.leading-normal.p-4
-					div
-						p.text-sm.text-gray-500.flex.items-center Todos los usuarios registrados
-						if usersTotal
-							p.text-admin-active.font-bold.text-2xl=usersTotal
-						else
-							p.text-admin-active.font-bold.text-2xl 0
+			h1.title(class="w-full px-2 mb-4 text-xl font-bold uppercase text-gray-600") Crear Administrador
+			h2.subtitle(class="w-full px-2 mb-4 text-lg font-bold text-gray-500") Da permisos para acceder a esta vista
+			//- div(class="w-full sm:w-6/12 lg:w-4/12 xl:w-4/12 px-2 mb-4")
+			form.login.px-2.pt-6.mb-4.w-full(action="/administrador/registro?redirect_url=administrador", method="POST", autcomplete="false")
+				.mb-4
+					//- if missing .border-red-500
+					label.block.text-gray-700.text-sm.font-bold.mb-2(for="name") Nombre
+					input.custom-input-admin.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.leading-tigt#name(type="name", placeholder="Nombre", class="focus:outline-none focus:shadow-outline", name="name")
+					p.text-red-500.text-xs.italic#nameMissing
+				.mb-4
+					//- if missing .border-red-500
+					label.block.text-gray-700.text-sm.font-bold.mb-2(for="email") Correo
+					input.custom-input-admin.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.leading-tigt#email(type="email", placeholder="Correo", class="focus:outline-none focus:shadow-outline", name="email")
+					p.text-red-500.text-xs.italic#emailMissing
+				.mb-6
+					//- if missing .border-red-500
+					label.block.text-gray-700.text-sm.font-bold.mb-2(for="password") Password
+					input.custom-input-admin.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.leading-tigt#password(type="password", placeholder="*********", class="focus:outline-none focus:shadow-outline", name="password")
+					p.text-red-500.text-xs.italic#passwordMissing
+				.mb-6
+					//- if missing .border-red-500
+					label.block.text-gray-700.text-sm.font-bold.mb-2(for="confirmPassword") Password
+					input.custom-input-admin.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.leading-tigt#confirmPassword(type="password", placeholder="*********", class="focus:outline-none focus:shadow-outline", name="confirmPassword")
+					p.text-red-500.text-xs.italic#confirmMissing
+				.flex.items-center.justify-start
+					button.custom-button-admin(class="hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline", type="submit") Crear Administrador
