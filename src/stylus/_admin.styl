@@ -45,6 +45,15 @@
 	&:hover{
 		background darken($c-pink, 20%) !important
 	}
+	&.border-only{
+		background transparent
+		border 1px solid $c-pink
+		color $c-pink
+		white-space nowrap
+		&:hover{
+			background lighten($c-pink, 95%) !important
+		}
+	}
 }
 .custom-input-admin{
 	&:focus, &:active{

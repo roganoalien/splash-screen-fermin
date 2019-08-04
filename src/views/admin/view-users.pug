@@ -11,11 +11,12 @@ block content
 		div(class="w-full lg:w-4/5 p-8 mt-6 lg:mt-0 text-gray-900 leading-normal bg-white border border-gray-400 border-rounded shadow-xl flex flex-wrap overflow-x-auto")
 			h1.title(class="w-full px-2 mb-4 text-xl font-bold uppercase text-gray-600") Ver Usuarios
 			h2.subtitle(class="w-full px-2 mb-4 text-lg font-bold text-gray-500") Todos los usuarios registrados
-			form.my-4#searchForm
+			form.my-4(class="w-full sm:w-full md:w-full lg:w-full xl:w-6/12")#searchForm
 				label.block.text-gray-700.text-sm.font-bold.mb-2(for="search") Buscar usuarios
-				.mb-1.flex
+				.mb-1.flex.w-full
 					input.appearance-none.border.rounded-tl.rounded-bl.w-full.py-2.px-3.text-gray-700.leading-tigt.inline-block#search(type="text", placeholder="Ej. Rodrigo García", class="focus:outline-none focus:shadow-none focus:border-gray-500", name="search")
 					button.custom-button-admin.inline-block.rounded-tr.rounded-br(type="submit", class="text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline") Buscar
+					a.custom-button-admin.border-only.inline-block.rounded.px-2.ml-4(href="/administrador/exportar/usuarios", class="text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline") Descargar CSV
 				p.text-xs.text-gray-400 Escribe el texto que desees buscar del usuario con la información de la tabla a excepción de la dirección MAC
 			table.w-full.text-left.table-collapse
 				thead

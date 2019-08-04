@@ -2,6 +2,7 @@ const express = require('express'),
     { check, validationResult } = require('express-validator/check'),
     passport = require('passport'),
     moment = require('moment'),
+    csv = require('csv-express'),
     router = express.Router();
 
 const { config } = require('../config/config-app'),
@@ -128,6 +129,25 @@ router.get('/administrador/usuarios', isAuthenticated, async (req, res) => {
         users
     });
 });
+router.get(
+    '/administrador/exportar/usuarios',
+    isAuthenticated,
+    async (req, res) => {
+        const date = moment().format('DD_MM_YYYY');
+        const filename = `usuarios_${date}.csv`;
+        User.find((err, Users) => {
+            if (err) res.send(err);
+            res.status(200);
+            res.setHeader('Content-Type', 'text/csv');
+            res.setHeader(
+                'Content-Disposition',
+                `attachment; filename=${filename}`
+            );
+            res.csv(Users, true);
+        });
+        // User.find(function(err, Users) => {});
+    }
+);
 //-- Cerrar Sesión
 router.get('/administrador/logout', (req, res) => {
     req.logout();
