@@ -10,15 +10,13 @@ const UserSchema = new Schema({
     lastname: { type: String, required: true },
     mac: { type: String },
     name: { type: String, required: true },
-    modem_data: {
-        base_grant_url: { type: String, required: true },
-        user_continue_url: { type: String, required: true },
-        node_id: { type: String, required: true },
-        node_mac: { type: String, required: true },
-        gateway_id: { type: String, required: true },
-        client_ip: { type: String, required: true },
-        client_mac: { type: String, required: true }
-    }
+    base_grant_url: { type: String, required: true },
+    user_continue_url: { type: String, required: true },
+    node_id: { type: String, required: true },
+    node_mac: { type: String, required: true },
+    gateway_id: { type: String, required: true },
+    client_ip: { type: String, required: true },
+    client_mac: { type: String, required: true }
 });
 
 function customDate() {

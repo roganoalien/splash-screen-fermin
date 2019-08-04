@@ -31,16 +31,16 @@ block content
 						th.text-sm.font-semibold.text-gray-700.p-2.bg-gray-200 MAC
 				tbody.align-center.table-users
 					each user in users
-						tr.user(data-search=`["${user.date}", "${user.name} ${user.lastname}", "${user.gender}", "${user.birthday}", "${user.modem_data.client_ip}", "${user.modem_data.user_continue_url}", "${user.email}"]`)
+						tr.user(data-search=`["${user.date}", "${user.name} ${user.lastname}", "${user.gender}", "${user.birthday}", "${user.client_ip}", "${user.user_continue_url}", "${user.email}"]`)
 							td.p-2.border-t.border-gray-300.text-xs.whitespace-no-wrap.text-gray-600=user.date
 							td.p-2.border-t.border-gray-300.text-xs.whitespace-no-wrap.text-gray-600=`${user.name} ${user.lastname}`
 							td.p-2.border-t.border-gray-300.text-xs.whitespace-no-wrap.text-gray-600=user.gender
 							td.p-2.border-t.border-gray-300.text-xs.whitespace-no-wrap.text-gray-600=user.birthday
 							td.p-2.border-t.border-gray-300.text-xs.whitespace-no-wrap.text-gray-600=user.email
-							if user.modem_data.base_grant_url
-								td.p-2.border-t.border-gray-300.text-xs.whitespace-no-wrap.text-gray-600=user.modem_data.user_continue_url
-								td.p-2.border-t.border-gray-300.text-xs.whitespace-no-wrap.text-gray-600=user.modem_data.client_ip
-								td.p-2.border-t.border-gray-300.text-xs.whitespace-no-wrap.text-gray-600=user.modem_data.client_mac
+							if user.base_grant_url
+								td.p-2.border-t.border-gray-300.text-xs.whitespace-no-wrap.text-gray-600=user.user_continue_url
+								td.p-2.border-t.border-gray-300.text-xs.whitespace-no-wrap.text-gray-600=user.client_ip
+								td.p-2.border-t.border-gray-300.text-xs.whitespace-no-wrap.text-gray-600=user.client_mac
 							else
 								td.p-2.border-t.border-gray-300.text-xs.whitespace-no-wrap.text-gray-600
 								td.p-2.border-t.border-gray-300.text-xs.whitespace-no-wrap.text-gray-600

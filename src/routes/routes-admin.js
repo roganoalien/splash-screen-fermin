@@ -132,20 +132,32 @@ router.get('/administrador/usuarios', isAuthenticated, async (req, res) => {
 router.get(
     '/administrador/exportar/usuarios',
     isAuthenticated,
-    async (req, res) => {
+    (req, res, next) => {
         const date = moment().format('DD_MM_YYYY');
+        let dataArray;
         const filename = `usuarios_${date}.csv`;
-        User.find((err, Users) => {
-            if (err) res.send(err);
-            res.status(200);
-            res.setHeader('Content-Type', 'text/csv');
-            res.setHeader(
-                'Content-Disposition',
-                `attachment; filename=${filename}`
-            );
-            res.csv(Users, true);
-        });
-        // User.find(function(err, Users) => {});
+        User.find()
+            .lean()
+            .exec({}, function(err, users) {
+                if (err) res.send(err);
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'text/csv');
+                res.setHeader(
+                    'Content-Disposition',
+                    `attachment; filename=${filename}`
+                );
+                res.csv(users, true);
+            });
+        // User.find((err, Users) => {
+        //     if (err) res.send(err);
+        //     res.status(200);
+        //     res.setHeader('Content-Type', 'text/csv');
+        //     res.setHeader(
+        //         'Content-Disposition',
+        //         `attachment; filename=${filename}`
+        //     );
+        //     res.csv(Users, true);
+        // });
     }
 );
 //-- Cerrar Sesión
@@ -177,15 +189,13 @@ router.post('/registrar/usuario', async (req, res) => {
         lastname,
         email,
         gender,
-        modem_data: {
-            base_grant_url,
-            user_continue_url,
-            node_id,
-            node_mac,
-            gateway_id,
-            client_ip,
-            client_mac
-        }
+        base_grant_url,
+        user_continue_url,
+        node_id,
+        node_mac,
+        gateway_id,
+        client_ip,
+        client_mac
     };
     const already = await User.findOne({ email });
     console.log(already);
