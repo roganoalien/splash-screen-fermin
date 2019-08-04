@@ -1,6 +1,8 @@
 const UTILS = (function() {
     // Obtenemos el objecto
-    const _$alerts = document.getElementById('alerts-holder');
+    const _$alerts = document.getElementById('alerts-holder'),
+        search = document.getElementById('searchForm'),
+        users = document.querySelectorAll('.user');
     // Creamos el objeto de Notyf
     let notyf = new Notyf({
         duration: 4000
@@ -35,10 +37,50 @@ const UTILS = (function() {
         }
     };
 
+    const _searchAdmin = () => {
+        search.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let displayAll = true;
+            let value = document.getElementById('search').value;
+            _hideAll();
+            displayAll = _searchMatch(value);
+            if (displayAll) {
+                _showAll();
+            }
+        });
+    };
+
+    const _searchMatch = text => {
+        users.forEach(user => {
+            let temp = true;
+            let _attribute = user.getAttribute('data-search');
+            if (_attribute.includes(text)) {
+                temp = false;
+                user.classList.remove('hidden');
+            }
+            return temp;
+        });
+    };
+
+    const _hideAll = () => {
+        users.forEach(user => {
+            user.classList.add('hidden');
+        });
+    };
+
+    const _showAll = () => {
+        users.forEach(user => {
+            user.classList.remove('hidden');
+        });
+    };
+
     return {
         alert: function() {
             // Se llama la función de Notyf
             _notyf();
+        },
+        search: function() {
+            _searchAdmin();
         }
     };
 })();

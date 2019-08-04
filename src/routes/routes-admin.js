@@ -102,7 +102,7 @@ router.post(
 //-- Vista dashboard
 router.get('/administrador', isAuthenticated, async (req, res) => {
     const dateNow = moment().format('DD/MM/YYYY');
-    const thisMonth = moment().format('/MM/');
+    const thisMonth = moment().format('/MM/YYYY');
     let regex = new RegExp(thisMonth, 'i');
     const searchNumber = await User.countDocuments({ date: dateNow });
     const searchMonth = await User.countDocuments({ date: regex });
