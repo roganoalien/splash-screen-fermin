@@ -59,6 +59,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //---- ROUTES ----
 //----------------
 app.get('/', (req, res) => {
+    let from, to;
     const {
         base_grant_url,
         user_continue_url,
@@ -80,6 +81,8 @@ app.get('/', (req, res) => {
     res.render('sections/splash', {
         title: 'Iniciar Sesión',
         redirect: req.query.base_grant_url ? false : true,
+        from_url: req.query.from || null,
+        to_url: req.query.to || null,
         userData
     });
 });

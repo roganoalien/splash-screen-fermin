@@ -4,7 +4,13 @@ block content
 	.container.splash-container
 		.row.align-items-center.justify-content-center.splash-row
 			form.main-form-splash.col-10.col-sm-8.col-md-8.col-lg-4(action="/registrar/usuario", method="POST")
-				if !redirect
+				if redirect
+					.form-group.justify-content-center.w-full.flex-center#getRedirect(data-from=from_url, data-where=to_url)
+						img(src="/public/img/4caminos.png", alt="Plaza Cuatro Caminos")
+					.form-group.justify-content-center.welcome-alert.w-full.flex-center.vertical
+						h1 ¡Bienvenido!
+						p Te estamos redirigiendo
+				else
 					input.d-none.invisible#base_grant_url(name="base_grant_url", value=userData.base_grant_url)
 					input.d-none.invisible#user_continue_url(name="user_continue_url", value=userData.user_continue_url)
 					input.d-none.invisible#node_id(name="node_id", value=userData.node_id)
@@ -12,31 +18,41 @@ block content
 					input.d-none.invisible#gateway_id(name="gateway_id", value=userData.gateway_id)
 					input.d-none.invisible#client_ip(name="client_ip", value=userData.client_ip)
 					input.d-none.invisible#client_mac(name="client_mac", value=userData.client_mac)
-				.form-group.flex-content-image
-					img(src="/public/img/4caminos.png", alt="Plaza Cuatro Caminos")
-					img(src="/public/img/wifi.png", alt="WIFI")
-					p Bienvenido(a) al portal WiFi de Plaza Cuatro Caminos. Para poder acceder a nuestra conexión de internet por favor ingresa los siguientes datos:
-				.form-group
-					label(for="name") Nombre(s):
-					input#name.form-control(type="text", name="name", required)
-				.form-group
-					label(for="lastname") Apellido(s):
-					input#lastname.form-control(type="text", name="lastname", required)
-				.form-group
-					label(for="birthday") Fecha de nacimiento:
-					input#birthday.form-control(type="date", name="birthday", required)
-				.form-group
-					label(for="email") Email:
-					input#email.form-control(type="email", name="email", required)
-				.form-group.of-radios
-					label(for="female") Sexo:
-				.form-check.form-check-inline
-					input.form-check-input#female(type="radio", name="gender", checked, value="femenino")
-					label.form-check-label(for="female") Femenino
-				.form-check.form-check-inline
-					input.form-check-input#male(type="radio", name="gender", value="masculino")
-					label.form-check-label(for="male") Masculino
-				.form-group
-					p#formAlert.form-text.text-muted Al continuar aceptas <a href="#terms">nuestos acuerdos y términos de privacidad</a> y también aceptas recibir información y promociones de nosotros
-				.form-group.button-group
-					button.btn.btn-primary(type="submit") Continuar
+					.form-group.flex-content-image
+						img(src="/public/img/4caminos.png", alt="Plaza Cuatro Caminos")
+						img(src="/public/img/wifi.png", alt="WIFI")
+						p Bienvenido(a) al portal WiFi de Plaza Cuatro Caminos. Para poder acceder a nuestra conexión de internet por favor ingresa los siguientes datos:
+					.form-group
+						label(for="name") Nombre(s):
+						input#name.form-control(type="text", name="name", required)
+					.form-group
+						label(for="lastname") Apellido(s):
+						input#lastname.form-control(type="text", name="lastname", required)
+					.form-group
+						label(for="birthday") Fecha de nacimiento:
+						input#birthday.form-control(type="date", name="birthday", required)
+					.form-group
+						label(for="email") Email:
+						input#email.form-control(type="email", name="email", required)
+					.form-group.of-radios
+						label(for="female") Sexo:
+					.form-check.form-check-inline
+						input.form-check-input#female(type="radio", name="gender", checked, value="femenino")
+						label.form-check-label(for="female") Femenino
+					.form-check.form-check-inline
+						input.form-check-input#male(type="radio", name="gender", value="masculino")
+						label.form-check-label(for="male") Masculino
+					.form-group
+						p#formAlert.form-text.text-muted Al continuar aceptas <a href="#terms">nuestos acuerdos y términos de privacidad</a> y también aceptas recibir información y promociones de nosotros
+					.form-group.button-group
+						button.btn.btn-primary(type="submit") Continuar
+block scripts
+	if redirect
+		script.
+			document.addEventListener('DOMContentLoaded', function(){
+				var from = document.getElementById('getRedirect').getAttribute('data-from');
+				var where = document.getElementById('getRedirect').getAttribute('data-where');
+				setTimeout(function(){
+					window.location.href = `${from}?continue_url=${where}&duration=${90 * 86400000}`
+				}, 2000);
+			});

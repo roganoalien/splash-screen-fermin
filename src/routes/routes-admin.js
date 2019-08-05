@@ -205,12 +205,12 @@ router.post('/registrar/usuario', async (req, res) => {
         });
         console.log(updated);
         req.flash('success', '¡Bienvenido de vuelta!');
-        res.redirect('/');
+        res.redirect(`/?from=${base_grant_url}&to=${user_continue_url}`);
     } else {
         const newUser = new User(update);
         await newUser.save();
         req.flash('success', '¡Gracias por registrarte!');
-        res.redirect('/');
+        res.redirect(`/?from=${base_grant_url}&to=${user_continue_url}`);
     }
 });
 
