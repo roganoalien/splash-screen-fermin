@@ -86,6 +86,16 @@ app.get('/', (req, res) => {
         userData
     });
 });
+app.get('/terminos', (req, res) => {
+    res.render('sections/terms', {
+        title: 'Términos y Condiciones'
+    });
+});
+app.get('/privacidad', (req, res) => {
+    res.render('sections/privacy', {
+        title: 'Condiciones de Privacidad'
+    });
+});
 app.use(adminRoutes);
 app.get('*', function(req, res) {
     res.status(404).render('errors/404');
