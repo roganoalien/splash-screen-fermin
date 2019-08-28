@@ -116,10 +116,42 @@ router.get('/administrador', isAuthenticated, async (req, res) => {
     });
 });
 //-- Crear Administrador
-router.get('/administrador/crear-admin', isAuthenticated, async (req, res) => {
+router.get('/administrador/crear-admin', isAuthenticated, (req, res) => {
     res.render('admin/create-admin', {
         title: 'Crear Administrador'
     });
+});
+//-- Cambiar contraseña de administrador
+router.get(
+    '/administrador/cambiar-password',
+    isAuthenticated,
+    async (req, res) => {
+        const admins = await Admin.find();
+        res.render('admin/change-password', {
+            title: 'Cambiar Password',
+            admins
+        });
+    }
+);
+//-- Cambiar password
+router.post('/administrador/cambiar-password', async (req, res, next) => {
+    const { password, confirmPassword, email } = req.body;
+    console.log(password);
+    console.log(confirmPassword);
+    console.log(email);
+    if (password !== confirmPassword) {
+        // throw new Error('No coinciden las nuevas contraseñas');
+        req.flash('error', `¡No se pudo actualizar el password de${email}!`);
+        res.redirect('/administrador/cambiar-password');
+    } else {
+        // async find user
+        const user = await User.findOne({ email });
+        console.log(user);
+        user.password = password;
+        user.save();
+        req.flash('success', `¡Password actualizado de ${email}!`);
+        res.redirect('/administrador/cambiar-password');
+    }
 });
 //-- Ver usuarios registrados
 router.get('/administrador/usuarios', isAuthenticated, async (req, res) => {

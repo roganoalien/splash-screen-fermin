@@ -7,6 +7,16 @@ const AdminSchema = new Schema({
     name: { type: String, required: true },
     password: { type: String, required: true }
 });
+// Cambiar contraseña
+AdminSchema.pre('save', function(next) {
+    let user = this;
+    //checks if password is changed, else no need to do anything
+    if (!user.isModified('password')) {
+        return next();
+    }
+    user.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+    next();
+});
 // Cifrar Contraseña
 AdminSchema.methods.encryptPassword = async password => {
     const salt = await bcrypt.genSalt(10);
