@@ -8,14 +8,22 @@ const AdminSchema = new Schema({
     password: { type: String, required: true }
 });
 // Cambiar contraseña
+//-- function that enters before the Schema is saved
 AdminSchema.pre('save', function(next) {
-    let user = this;
-    //checks if password is changed, else no need to do anything
-    if (!user.isModified('password')) {
+    // Uses this to reference the Schema, it should not be an arrow function
+    //-- isModified('parameter') is to detect if some parameter from the Schema is being changed
+    if (this.isModified('password')) {
+        console.log('se modifica');
+        // Does the password HASH
+        this.password = bcrypt.hashSync(
+            this.password,
+            bcrypt.genSaltSync(10),
+            null
+        );
+        next();
+    } else {
         return next();
     }
-    user.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
-    next();
 });
 // Cifrar Contraseña
 AdminSchema.methods.encryptPassword = async password => {

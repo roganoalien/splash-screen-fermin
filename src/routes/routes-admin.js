@@ -145,12 +145,20 @@ router.post('/administrador/cambiar-password', async (req, res, next) => {
         res.redirect('/administrador/cambiar-password');
     } else {
         // async find user
-        const user = await User.findOne({ email });
+        const user = await Admin.findOne({ email });
         console.log(user);
         user.password = password;
-        user.save();
-        req.flash('success', `¡Password actualizado de ${email}!`);
-        res.redirect('/administrador/cambiar-password');
+        console.log(user.password);
+        user.save(err => {
+            if (err) {
+                console.log(err);
+                req.flash('error', err);
+                res.redirect('/administrador/cambiar-password');
+            } else {
+                req.flash('success', `¡Password actualizado de ${email}!`);
+                res.redirect('/administrador/cambiar-password');
+            }
+        });
     }
 });
 //-- Ver usuarios registrados
