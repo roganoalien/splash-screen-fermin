@@ -42,7 +42,7 @@
         "notyf": "^3.0.4",
         "passport": "^0.4.0",
         "passport-local": "^1.0.0",
-        "pug": "^2.0.3",
+        "pug": "^3.0.1",
         "serve-favicon": "^2.5.0",
         "tailwindcss": "^1.0.5"
     },
